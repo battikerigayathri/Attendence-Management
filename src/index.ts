@@ -1,10 +1,14 @@
 import express from "express";
-// @ts-ignore
-import { ApolloServer } from "apollo-server-express";
-import axios from "axios";
 import http from "http";
+import cors from 'cors';
+import bodyParser from 'body-parser';
 import { makeExecutableSchema } from "graphql-tools";
 import { applyMiddleware } from "graphql-middleware";
+
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+
 
 import { typeDefs, resolvers, schemaDirectives } from "./elastic-search";
 
@@ -27,11 +31,11 @@ const schema = applyMiddleware(
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
     schema,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
   await server.start();
-  server.applyMiddleware({ app });
-  await new Promise<void>((resolve) =>
-    httpServer.listen({ port: 4000 }, resolve)
-  );
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+  app.use('/graphql',cors<cors.CorsRequest>(),
+  bodyParser.json(), expressMiddleware(server));
+  await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
+  console.log(`🚀 Server ready at http://localhost:4000/`);
 })();
