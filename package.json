@@ -16,6 +16,7 @@
   "type": "module",
   "dependencies": {
     "@apollo/server": "^4.2.2",
+    "@mercury-js/core": "^1.5.1",
     "@types/node": "^16.11.11",
     "apollo-server-express": "^3.5.0",
     "axios": "^0.24.0",
