@@ -1,0 +1,34 @@
+import mercury from "@mercury-js/core";
+export const Attendence=mercury.createModel("Attendence",{
+    user:{
+        type:"relationship",
+        ref:"User"
+    },
+    session:{
+        type:"relationship",
+        ref:"Session"
+    },
+    trainingCentre:{
+        type:"relationship",
+        ref:"TrainingCentre"
+    },
+    checkIn:{
+        type:"date"
+    },
+    checkOut:{
+        type:"date"
+    },
+    status:{
+        type:"enum",
+        enumType:"string",
+        enum:["PRESENT","ABSENT","ON_LEAVE"]
+    },
+    checkInImage:{
+        type:"relationship",
+        ref:"File"
+    },
+    checkOutImage:{
+        type:"relationship",
+        ref:"File"
+    },
+})

@@ -1,6 +1,8 @@
-import mercury from "@mercury-js/core";
-import {UserSchema} from "./User";
-import {ApplicationSchema} from "./Application";
-
-mercury.createList("User", UserSchema);
-mercury.createList("Application", ApplicationSchema);
+export {User} from "./User"
+export {Address} from "./Address";
+export {Attendence} from "./Attendence";
+export {AssignedCentre} from "./CentreAssignments";
+export {FaceEncoding} from "./FaceEncoding";
+export {File} from "./File";
+export {Session} from "./Session";
+export {TrainingCentre} from "./TrainingCentre";

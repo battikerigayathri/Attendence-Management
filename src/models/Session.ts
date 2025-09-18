@@ -1,0 +1,41 @@
+import mercury from "@mercury-js/core";
+export const Session=mercury.createModel("Session",{
+    sessionName:{
+        type:"string"
+    },
+    date:{
+        type:"date"
+    },
+    trainingCentre:{
+        type:"relationship",
+        ref:"TrainingCentre"
+    },
+    coach:{
+        type:"relationship",
+        ref:"User"
+    },
+    players:{
+        type:"relationship",
+        ref:"User",
+        many:true
+    },
+    startTime:{
+        type:"string"
+    },
+    endTime:{
+        type:"string"
+    },
+    isActive:{
+        type:"boolean",
+        default:true
+    },
+    description:{
+        type:"string"
+    },
+    status:{
+        type:"enum",
+        enumType:"string",
+        enum:["SCHEDULED","ACTIVE","COMPLETED","CANCELLED"],
+        default:"SCHEDULED"
+    }
+});

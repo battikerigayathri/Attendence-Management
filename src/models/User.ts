@@ -1,50 +1,34 @@
-export const UserSchema = {
-  fields: {
-    firstName: {
-      type: "string",
-    },
-    lastName: {
-      type: "string",
-    },
-    email: {
-      type: "string",
-      require: true,
-      unique: true,
-    },
-    organization: {
-      type: "string",
-    },
-    zipcode: {
-      type: "string",
-    },
-    role: {
-      type: "enum",
-      enumType: "string",
-      enum: ["USER", "ADMIN", "SUPERADMIN"],
-      default: "USER",
-    },
-    apps: {
-        type: "relationship",
-        ref: "Application",
-        many: true
-    }
+import mercury from "@mercury-js/core";
+export const User= mercury.createModel("User",{
+  userName:{
+    type:"string"
   },
-  access: {
-    default: true,
-    acl: [
-      {
-        SUPERADMIN: {
-          read: true,
-          create: true,
-          update: true,
-          delete: true,
-        },
-      },
-      { ADMIN: { create: true, read: true, update: true, delete: true } },
-      { EMPLOPYEE: { create: false, read: true, update: true, delete: false } },
-      {
-        ANONYMOUS: { read: false, update: false, delete: false, create: false },
-      },
-    ],
+  email:{
+    type:"string",
+    unique:true
   },
-};
+  password:{
+    type:"string",
+    bcrypt:true
+  },
+  phone:{
+    type:"number"
+  },
+  role:{
+    type:"enum",
+    enumType:"string",
+    enum:["ADMIN","COACH","PLAYER","SPONSOR"],
+    default:"PLAYER"
+  },
+  token:{
+    type:"string"
+  },
+  profilePic:{
+    type:"relationship",
+    ref:"File"
+  },
+  isActive:{
+    type:"boolean",
+    default:true
+  }
+})
