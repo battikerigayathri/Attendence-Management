@@ -7,15 +7,15 @@ export const setContext = async (req: any) => {
   if (!requestedApi || requestedApi === "introspectionquery") {
     return { ...req, user: { profile: "ADMIN" } };
   }
-  try {
+  try {    
     if (baseApis.includes(requestedApi)) {
       return { ...req, user: { profile: "ADMIN" }, base };
     } else {
       if (!req.headers.authorization) {
         throw new GraphQLError("Authorization is required");
       }
-      const session: string = req.headers.authorization;
-      const connect = new Connect(session);
+      const session: string = req.headers.authorization;      
+      const connect = new Connect(session);      
       try {
         connect.validateSession(session);
         return { ...req, user: { ...connect.user, profile: connect.user?.role }, connect, base };

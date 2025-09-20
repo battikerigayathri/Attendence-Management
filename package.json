@@ -16,6 +16,7 @@
   "type": "module",
   "dependencies": {
     "@apollo/server": "^4.2.2",
+    "@graphql-tools/import": "^7.1.1",
     "@mercury-js/core": "^2.0.4",
     "@types/node": "^16.11.11",
     "apollo-server-express": "^3.5.0",
@@ -24,7 +25,6 @@
     "express": "^4.17.1",
     "googleapis": "^160.0.0",
     "graphql": "^16.0.1",
-    "graphql-import": "^1.0.2",
     "graphql-middleware": "^6.1.12",
     "graphql-rate-limit": "^3.3.0",
     "graphql-tools": "^8.2.0",

@@ -12,6 +12,7 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import * as dotenv from "dotenv";
 import "./models";
 import "./profiles";
+import "./hooks"
 import { typeDefs, resolvers } from "./elastic-search";
 import { setContext } from "./helpers/setContext";
 dotenv.config();
@@ -61,7 +62,7 @@ mercury.connect(DB_URL);
         context: async ({ req }) => await setContext(req)
       })
     );
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 5000;
     await new Promise<void>((resolve) => httpServer.listen({ port: PORT }, resolve));
     console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
   } catch (error) {

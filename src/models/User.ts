@@ -12,12 +12,12 @@ export const User= mercury.createModel("User",{
     bcrypt:true
   },
   phone:{
-    type:"number"
+    type:"string"
   },
   role:{
     type:"enum",
     enumType:"string",
-    enum:["ADMIN","COACH","PLAYER","SPONSOR"],
+    enum:["ADMIN","COACH","PLAYER","SPONSOR","SUPER_ADMIN"],
     default:"PLAYER"
   },
   token:{
@@ -30,5 +30,5 @@ export const User= mercury.createModel("User",{
   isActive:{
     type:"boolean",
     default:true
-  }
+  },
 })

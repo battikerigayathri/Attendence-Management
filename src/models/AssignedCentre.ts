@@ -12,8 +12,9 @@ export const AssignedCentre=mercury.createModel("AssignedCentre",{
     role:{
         type:"enum",
         enumType:"string",
-        enum:["COACH","PLAYER"]
+        enum:["COACH","PLAYER","ADMIN"]
     },
+    // admin
     assignedBy:{
         type:"relationship",
         ref:"User"

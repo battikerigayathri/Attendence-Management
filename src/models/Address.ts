@@ -22,6 +22,6 @@ export const Address=mercury.createModel("Address",{
         type:"number"
     },
     contactNumber:{
-        type:"number"
+        type:"string"
     }
 })

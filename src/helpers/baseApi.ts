@@ -1,1 +1,1 @@
-export const baseApis = ["signin", "verifyotp", "register", "resendotp"];
+export const baseApis = ["register", "login"];

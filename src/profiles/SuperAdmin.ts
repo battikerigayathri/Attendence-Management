@@ -73,4 +73,4 @@ const rules = [
         },
     },
 ]
-export const AdminProfile = mercury.access.createProfile("ADMIN", rules);
+export const SuperAdminProfile = mercury.access.createProfile("SUPER_ADMIN", rules);

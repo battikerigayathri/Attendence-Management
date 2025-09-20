@@ -1,5 +1,4 @@
 import mercury from "@mercury-js/core";
-import { truncate } from "lodash";
 export const TrainingCentre= mercury.createModel("TrainingCentre",{
   centerId:{
     type:"number"
@@ -18,5 +17,10 @@ export const TrainingCentre= mercury.createModel("TrainingCentre",{
   isActive:{
     type:"boolean",
     default:"true"
+  },
+  admin:{
+    type:"relationship",
+    ref:"User",
+    many:true
   }
 })

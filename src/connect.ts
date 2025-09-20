@@ -39,7 +39,7 @@ export class Connect extends Base {
 
   validateSession(session: string) {
     try {
-      let user = this.Auth.isValidSession(session);
+      let user = this.Auth.isValidSession(session);      
       this.user = user;
     } catch (error: any) {
       this.user = null;

@@ -14,7 +14,7 @@ export default class Auth {
 
   isValidSession(session: string) {
     try {
-      const user = this.getUserBySession(session);
+      const user = this.getUserBySession(session);  
       if (_.isEmpty(user)) throw new Error("User is not present!");
       return user;
     } catch (error: any) {

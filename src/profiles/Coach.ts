@@ -9,5 +9,14 @@ const rules = [
             delete: true,
         },
     },
+    {
+        modelName: "File",
+        access: {
+            create: true,
+            read: true,
+            update: true,
+            delete: true,
+        },
+    },
 ]
 export const CoachProfile = mercury.access.createProfile("COACH", rules);

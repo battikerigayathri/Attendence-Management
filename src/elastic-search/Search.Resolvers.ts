@@ -1,6 +1,7 @@
 import mercury from "@mercury-js/core";
 import { ApolloCtx,ctxUser} from "../connect";
 import { GraphQLError } from "graphql/error/GraphQLError";
+import _ from "lodash";
 // import {verifyGoogleToken} from "../helperFunctions/GoogleOAuth"
 export const resolvers =  {
   Query: {
@@ -8,8 +9,7 @@ export const resolvers =  {
       `Hello ${name || "World"}`,
   },
   Mutation:{
-    register:async (root: any,{ input }: { input: any },ctx: ApolloCtx) => {
-        console.log(input);
+    register:async (root: any,{ input }: { input: any },ctx: any) => {
             try {
               const email = input.email;
               const existingUser:any= await mercury.db.User.get({ email:email },{id:"1",profile:"ADMIN"});
@@ -54,10 +54,33 @@ export const resolvers =  {
                 throw error;
             }
     },
-    // googleLogin:async(root:any,{ token }: { token: string },ctx:ApolloCtx)=>{
-    //         const googleUser = await verifyGoogleToken(token);
-    //         console.log(googleUser);
+    login: async (root: any, { value, password }: { value: string; password: string }, ctx: any) => {
+            const user: any = await mercury.db.User.mongoModel.findOne({
+                $or: [
+                    { email: value },
+                    { userName: value }
+                ]
+            });
             
-    // }
+            if (_.isEmpty(user)) {
+                throw new GraphQLError("User not found", {
+                    extensions: {
+                        code: "UNAUTHENTICATED",
+                    },
+                });
+            }
+            
+            const isValidPassword = await user.verifyPassword(password);
+            
+            if (!isValidPassword) {
+                throw new GraphQLError("Invalid password", {
+                    extensions: {
+                        code: "UNAUTHENTICATED",
+                    },
+                });
+            }
+            
+            return { message: "Login Successful..!!",user:user}
+    } 
   }
 }
